@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button"
 import { useData } from "@/hooks/auth/useData"
 import { useRouter } from "next/navigation"
 import { Login } from "@/utils/DataSync"
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 
 interface LoginPageProps {
     changePointer: (pointer: "register" | "login") => void
