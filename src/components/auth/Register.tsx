@@ -91,12 +91,15 @@ export default function RegisterPage({ changePointer }: RegisterPageProps) {
                 return
             }
 
-            socket?.emit("UPDATE_DATA", {
-                students: [response],
-                replace: false
-            })
+            socket?.emit("users:create", [
+                {
+                    type: "broadcast",
+                    to: "admins",
+                    data: response
+                }
+            ])
 
-            router.push("/login")
+            router.push("/login");
         } catch (err) {
             alert("Error al registrar usuario")
             console.error(err)

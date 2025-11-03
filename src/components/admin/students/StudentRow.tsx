@@ -1,7 +1,7 @@
 "use client";
 import { IconDotsVertical, IconFolderOpen, IconTrash, IconUserCheck, IconUserX } from "@tabler/icons-react";
 import ActionMenu from "@/components/popups/ActionMenu";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 import { useState } from "react";
 
 interface StudentRowProps {

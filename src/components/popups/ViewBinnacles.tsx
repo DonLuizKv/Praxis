@@ -1,4 +1,4 @@
-import { Binnacle } from "@/types/Users";
+import { Binnacle } from "@/types/user";
 import { IconZoomScan } from "@tabler/icons-react"
 import { IconDownload } from "@tabler/icons-react"
 import { IconX } from "@tabler/icons-react"

@@ -1,7 +1,7 @@
 "use client"
 
 import { getStudents, Verify, getScenarys } from "@/utils/DataSync";
-import { DataUser } from "@/types/Users";
+import { DataUser } from "@/types/user";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSocket } from "../server/useSocket";
 import Cookies from "js-cookie";

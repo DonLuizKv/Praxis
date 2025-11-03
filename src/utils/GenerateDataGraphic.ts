@@ -1,5 +1,5 @@
 import { DataGraphic } from "@/types/Generic";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 
 export const GenerateDataGraphic = (students: Student[]): DataGraphic => {
     const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'];

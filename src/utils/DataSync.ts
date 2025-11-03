@@ -1,4 +1,4 @@
-import { DataChangeStudent } from "@/types/Users";
+import { DataChangeStudent } from "@/types/user";
 import Cookies from "js-cookie";
 
 interface registerProps {
@@ -101,8 +101,8 @@ export async function Register(data: registerProps) {
 
         if (!petition.ok) throw new Error(response.error || "Error al registrar usuario");
         return response;
-    } catch (error) {
-        return { error: error.message || "Error al registrar usuario" };
+    } catch (error: unknown) {
+        return { error: error || "Error al registrar usuario" };
     }
 }
 

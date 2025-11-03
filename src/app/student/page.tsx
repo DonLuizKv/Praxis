@@ -2,11 +2,10 @@
 import StudentSection from "@/components/student/StudentSection";
 import Button from "@/components/ui/Button";
 import { useData } from "@/hooks/auth/useData";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 import { IconLoader2, IconMoodSadFilled } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useLogout } from "@/hooks/client/useLogout";
-import { usePreventBackNavigation } from "@/hooks/client/usePreventBackNavigation";
 
 export default function Home() {
   const { data, isLoading: isLoadingData } = useData();

@@ -1,6 +1,6 @@
 "use client"
 import { ReactNode, useEffect, useRef } from "react";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 
 interface Action {
     label: string;

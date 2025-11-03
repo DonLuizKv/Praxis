@@ -1,5 +1,5 @@
 import StudentInfoCard from "@/components/ui/StudentInfoCard";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 import { IconBuildings, IconDownload, IconEye, IconFolderOpen, IconId, IconUpload, IconUser, IconUserCircle, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import { useRef } from "react";

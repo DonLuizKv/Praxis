@@ -1,5 +1,5 @@
 "use client"
-import { Binnacle } from "@/types/Users";
+import { Binnacle } from "@/types/user";
 import { IconDownload, IconX, IconZoomScan } from "@tabler/icons-react";
 import { useRef } from "react";
 

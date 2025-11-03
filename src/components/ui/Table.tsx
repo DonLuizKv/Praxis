@@ -1,7 +1,7 @@
 import { IconClick, IconRefresh, IconUserPlus, IconUserMinus, IconUserFilled } from "@tabler/icons-react";
 import Button from "./Button";
 import { useState, useEffect, useCallback } from "react";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 
 interface TableProps {
     pageSize: number;

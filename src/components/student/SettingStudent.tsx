@@ -3,7 +3,7 @@ import { useState } from "react";
 import General from "../ui/settings/General";
 import Security from "../ui/settings/Security";
 import Notifications from "../ui/settings/Notifications";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 
 interface SettingsProps {
     onClose: () => void;

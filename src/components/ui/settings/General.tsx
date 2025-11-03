@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useFile } from "@/hooks/client/useFile";
 import { IconId, IconMail, IconUser } from "@tabler/icons-react";
 import { updateStudent } from "@/utils/DataSync";
-import { DataChangeStudent } from "@/types/Users";
+import { DataChangeStudent } from "@/types/user";
 
 interface GeneralSettingsProps {
     dataUser: {

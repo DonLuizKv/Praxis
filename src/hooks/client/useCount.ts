@@ -1,4 +1,4 @@
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 import { useEffect, useState } from "react";
 import { countableData } from "@/types/Generic";
 

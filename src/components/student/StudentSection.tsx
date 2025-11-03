@@ -8,7 +8,7 @@ import UploadBinnacles from "../popups/UploadBinnacles";
 import ViewBinnacles from "../popups/ViewBinnacles";
 import Arl from "./Arl";
 import CoverLetter from "./CoverLetter";
-import { Document, Student } from "@/types/Users";
+import { Document, Student } from "@/types/user";
 import UserInfo from "./UserInfo";
 import Notifications from "../popups/Notifications";
 import { uploadDocument } from "@/utils/DataSync";

@@ -1,6 +1,6 @@
 import { useCount } from "@/hooks/client/useCount";
 import { Report } from "@/types/Report";
-import { Student, Document } from "@/types/Users";
+import { Student, Document } from "@/types/user";
 import { IconHelpCircle } from "@tabler/icons-react";
 
 interface PDFpreviewProps {

@@ -7,7 +7,7 @@ import StudentsTable from "./StudentsTable"
 import SearchAndFilter from "../../ui/Search&Filter"
 import { usePagination } from "@/hooks/client/usePagination"
 import AddScenary from "@/components/popups/AddScenary"
-import { Scenary, Student } from "@/types/Users"
+import { Scenary, Student } from "@/types/user"
 import { useData } from "@/hooks/auth/useData"
 
 export default function Students() {

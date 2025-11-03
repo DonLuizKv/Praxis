@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import WeekProgress from "../ui/WeekProgress";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 
 
 export default function Scenary({ scenary, student }: { scenary: string, student: Student }) {

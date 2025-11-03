@@ -1,6 +1,6 @@
 "use client"
 
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 import ProfileStudent from "@/components/admin/students/ProfileStudent";
 import BinnacleViewer from "@/components/popups/BinnacleViewer";
 import { useState } from "react";

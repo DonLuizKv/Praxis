@@ -1,4 +1,4 @@
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 import { IconUserCheck, IconUserExclamation, IconUsersGroup, IconUserX } from "@tabler/icons-react";
 
 interface StadisticsProps {

@@ -7,6 +7,7 @@ import { useData } from "@/hooks/auth/useData"
 import { useRouter } from "next/navigation"
 import { Login } from "@/utils/DataSync"
 import Cookies from "js-cookie";
+import { useSocket } from "@/hooks/server/useSocket"
 
 interface LoginPageProps {
     changePointer: (pointer: "register" | "login") => void
@@ -21,6 +22,8 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const router = useRouter()
     const { setIsAuthenticated } = useData()
+    const { socket } = useSocket();
+    
 
     const validateForm = () => {
         const newErrors: typeof errors = {}
@@ -59,10 +62,18 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
                 return;
             };
 
+            socket?.emit("users:login", [
+                {
+                    type: "broadcast",
+                    to: "admins",
+                    data: response
+                }
+            ])
+
             if (response.token) {
                 Cookies.set("token", response.token)
                 setIsAuthenticated(true)
-                router.push(`/${response.user.role}`)
+                router.push(`/auth`)
             }
         } catch (error) {
             console.log(error);

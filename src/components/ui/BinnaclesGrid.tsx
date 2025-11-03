@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconCaretLeftFilled, IconCaretRightFilled } from '@tabler/icons-react';
-import { Student } from '@/types/Users';
+import { Student } from '@/types/user';
 
 const ITEMS_PER_PAGE = 100;
 

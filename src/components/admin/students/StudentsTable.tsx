@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import StudentRow from "@/components/admin/students/StudentRow";
 import ViewStudent from "@/components/popups/ViewStudent";
 import ConfirmationDialog from "@/components/popups/ConfirmationDialog";
-import { Student } from "@/types/Users";
+import { Student } from "@/types/user";
 import { IconLoader2, IconMoodPuzzled } from "@tabler/icons-react";
 import { useStudent } from "@/hooks/server/useStudent";
 

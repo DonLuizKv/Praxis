@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import Button from "../ui/Button";
 import MiniPopup from "../ui/MiniPopup";
 import Table from "../ui/Table";
-import { Scenary, Student } from "@/types/Users";
+import { Scenary, Student } from "@/types/user";
 
 interface AddScenaryProps {
     students: Student[];

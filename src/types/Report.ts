@@ -1,4 +1,4 @@
-import { Student } from "./Users";
+import { Student } from "./user";
 
 export type Report = {
     title: string;
