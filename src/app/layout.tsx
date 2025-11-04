@@ -14,7 +14,7 @@ const asap = Asap({
 
 export const metadata: Metadata = {
   title: "Praxis",
-  description: "Una aplicacion de gestion de documentos de practicas.",
+  description: "Una aplicacion de gestion de practicas.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
