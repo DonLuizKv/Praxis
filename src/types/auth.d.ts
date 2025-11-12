@@ -13,11 +13,11 @@ export type LoginBody = {
 
 export type LoginResponse = {
     uid: string,
-    username: string,
+    name: string,
     email: string,
-    token: string
+    role: string,
 }
 
 export type VerifyResponse = {
-    verification: boolean;
+    userData: User | null,
 }

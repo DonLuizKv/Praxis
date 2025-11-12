@@ -4,7 +4,7 @@ import { Report } from "@/types/Report";
 import { useState } from "react"
 import CardReport from "./CardReport";
 import ReportViewer from "./ReportViewer";
-import { useData } from "@/hooks/auth/useData";
+import { useData } from "@/hooks/general/useAuth";
 
 export default function Reports() {
   const { data } = useData();

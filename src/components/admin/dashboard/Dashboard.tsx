@@ -2,7 +2,7 @@
 import BigGrid from "@/components/ui/BinnaclesGrid";
 import BentoCard from "./BentoCard";
 import HeaderSection from "@/components/ui/HeaderSection";
-import { useData } from "@/hooks/auth/useData";
+import { useData } from "@/hooks/general/useAuth";
 import { useEffect } from "react";
 import { useState } from "react";
 import { IconLoader2 } from "@tabler/icons-react";

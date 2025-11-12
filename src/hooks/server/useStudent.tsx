@@ -1,5 +1,5 @@
 import { useSocket } from "./useSocket";
-import { useData } from "@/hooks/auth/useData";
+import { useData } from "@/hooks/general/useAuth";
 import Cookies from "js-cookie";
 
 export const useStudent = () => {

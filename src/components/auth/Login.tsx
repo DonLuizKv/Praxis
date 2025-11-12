@@ -3,11 +3,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { IconEye, IconEyeOff } from "@tabler/icons-react"
 import Button from "@/components/ui/Button"
-import { useData } from "@/hooks/auth/useData"
 import { useRouter } from "next/navigation"
-import { Login } from "@/utils/DataSync"
-import Cookies from "js-cookie";
-import { useSocket } from "@/hooks/server/useSocket"
+import { useFetch } from "@/hooks/server/useFetch"
 
 interface LoginPageProps {
     changePointer: (pointer: "register" | "login") => void
@@ -19,11 +16,10 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
     const [errors, setErrors] = useState<{ email?: string; password?: string, generalError?: string }>({})
     const [showErrorButton, setShowErrorButton] = useState<boolean>(false)
 
-    const [isLoading, setIsLoading] = useState<boolean>(false)
     const router = useRouter()
-    const { setIsAuthenticated } = useData()
-    const { socket } = useSocket();
-    
+    const { Call, Backend, loading } = useFetch();
+    // const { socket } = useSocket();
+
 
     const validateForm = () => {
         const newErrors: typeof errors = {}
@@ -42,45 +38,27 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
         if (!validateForm()) return;
 
-        setIsLoading(true)
-
-        try {
-            const response = await Login({
+        const session = await Call(() =>
+            Backend.Auth.login({
                 email: login.email,
-                password: login.password
-            });
-            
-            if (response.error) {
-                setShowErrorButton(true);
-                setTimeout(() => {
-                    setShowErrorButton(false);
-                }, 2000);
-                setErrors({ generalError: response.error });
-                return;
-            };
+                password: login.password,
+            })
+        );
 
-            socket?.emit("users:login", [
-                {
-                    type: "broadcast",
-                    to: "admins",
-                    data: response
-                }
-            ])
-
-            if (response.token) {
-                Cookies.set("token", response.token)
-                setIsAuthenticated(true)
-                router.push(`/auth`)
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
+        if (!session) {
+            setShowErrorButton(true);
+            setTimeout(() => setShowErrorButton(false), 2000);
+            setErrors({ generalError: "Credenciales inválidas." });
+            return;
         }
-    }
+
+        await Backend.Auth.verify();
+
+        router.push(`/${session.role}`);
+    };
 
     return (
         <section className="h-full w-full flex flex-col gap-4 items-center justify-center p-2">
@@ -158,9 +136,9 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
                                     type="submit"
                                     style="basic"
                                     aditionalsStyles="w-full"
-                                    disabled={isLoading}
+                                    disabled={loading}
                                     text={
-                                        isLoading ? (
+                                        loading ? (
                                             "Iniciando sesión..."
                                         ) : (
                                             "Iniciar sesión"

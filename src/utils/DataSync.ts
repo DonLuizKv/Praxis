@@ -73,14 +73,13 @@ export async function Login(data: { email: string, password: string }) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
+            credentials: "include"
         });
 
         const response = await petition.json();
 
-        console.log(response)
-
         if (!petition.ok) throw new Error(response.error || "Error al iniciar sesión");
-        
+
         return response;
     } catch (error) {
         return { error: error.message || "Error al iniciar sesión" };
