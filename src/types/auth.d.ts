@@ -12,9 +12,6 @@ export type LoginBody = {
 }
 
 export type LoginResponse = {
-    uid: string,
-    name: string,
-    email: string,
     role: string,
 }
 

@@ -5,6 +5,7 @@ import { IconEye, IconEyeOff } from "@tabler/icons-react"
 import Button from "@/components/ui/Button"
 import { useRouter } from "next/navigation"
 import { useFetch } from "@/hooks/server/useFetch"
+import { useAuth } from "@/hooks/general/useAuth"
 
 interface LoginPageProps {
     changePointer: (pointer: "register" | "login") => void
@@ -18,6 +19,7 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
 
     const router = useRouter()
     const { Call, Backend, loading } = useFetch();
+    const { verify } = useAuth();
     // const { socket } = useSocket();
 
 
@@ -55,9 +57,9 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
             return;
         }
 
-        await Backend.Auth.verify();
-        console.log(session.uid);
-        // router.push(`/${session.role}`);
+        verify();
+
+        router.push(`/${session.role}`);
     };
 
     return (

@@ -3,7 +3,7 @@
 import { Backend } from "@/api/Requests";
 import { CV, Scenary } from "@/types/document";
 import { Student } from "@/types/user";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type DataPraxis = {
     Students: Student[];
@@ -71,6 +71,10 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
             return { ...prev, [entity]: updatedList };
         });
     };
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <DataContext.Provider value={{ data, setData, getData, updateData, deleteData, loadingData }}>

@@ -276,10 +276,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-    useEffect(() => {
-        verify();
-    }, []);
-
     return (
         <AuthContext.Provider value={{ user, isAuthenticated, isVerifying, verify, logout }}>
             {children}

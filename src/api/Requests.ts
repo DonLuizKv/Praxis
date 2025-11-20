@@ -47,9 +47,9 @@ export const Backend = {
     Scenary: {
         getAll: () => API<null, Scenary[]>({
             endpoint: "/scenary",
+            credentials: "include",
             props: {
                 method: "GET",
-                headers: { credentials: "include" },
             }
         }),
     },
