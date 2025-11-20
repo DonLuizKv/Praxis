@@ -23,11 +23,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <link rel="icon" href="/logo_animed.ico" />
             </head>
             <body className={asap.className}>
-                <AuthProvider>
-                    <AnimatedLayout>
-                        {children}
-                    </AnimatedLayout>
-                </AuthProvider>
+                <AnimatedLayout>
+                    {children}
+                </AnimatedLayout>
             </body>
         </html>
     );

@@ -15,6 +15,7 @@ export const Backend = {
 
         login: (data: LoginBody) => API<LoginBody, LoginResponse>({
             endpoint: "/auth/login",
+            credentials: "include",
             props: {
                 method: "POST",
                 body: data

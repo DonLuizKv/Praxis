@@ -56,8 +56,8 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
         }
 
         await Backend.Auth.verify();
-
-        router.push(`/${session.role}`);
+        console.log(session.uid);
+        // router.push(`/${session.role}`);
     };
 
     return (

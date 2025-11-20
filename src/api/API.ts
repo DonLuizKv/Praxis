@@ -1,5 +1,4 @@
-"use client"
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
 
 interface APIProps<payload> {
     endpoint: string;
