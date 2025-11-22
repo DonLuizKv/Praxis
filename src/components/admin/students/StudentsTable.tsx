@@ -6,7 +6,6 @@ import ViewStudent from "@/components/popups/ViewStudent";
 import ConfirmationDialog from "@/components/popups/ConfirmationDialog";
 import { Student } from "@/types/user";
 import { IconLoader2, IconMoodPuzzled } from "@tabler/icons-react";
-import { useStudent } from "@/hooks/server/useStudent";
 
 interface StudentsTableProps {
     dataStudents: Student[],
@@ -14,29 +13,27 @@ interface StudentsTableProps {
 }
 
 export default function StudentsTable({ dataStudents, isLoading }: StudentsTableProps) {
-    const { handleDelete: deleteStudent, handleUpdate: updateStudent } = useStudent();
     const [student, setStudent] = useState<Student>();
-    const [hasLoaded, setHasLoaded] = useState(false);
     const [viewEstudent, setViewEstudent] = useState<boolean>(false);
     const [alertPopup, setAlertPopup] = useState<boolean>(false);
     const [actionType, setActionType] = useState<'delete' | 'disable' | null>(null);
 
     const handleDelete = async () => {
-        try {
-            const response = await deleteStudent(student.id);
-            console.log(response);
-        } catch (error) {
-            console.error(error);
-        }
+        // try {
+        //     const response = await deleteStudent(student.id);
+        //     console.log(response);
+        // } catch (error) {
+        //     console.error(error);
+        // }
     }
 
     const handleDisable = async () => {
-        try {
-            const response = await updateStudent(student.id, { state: !student.state });
-            console.log(response);
-        } catch (error) {
-            console.error(error);
-        }
+        // try {
+        //     const response = await updateStudent(student.id, { state: !student.state });
+        //     console.log(response);
+        // } catch (error) {
+        //     console.error(error);
+        // }
     }
 
     const handleConfirmAction = () => {
@@ -58,31 +55,27 @@ export default function StudentsTable({ dataStudents, isLoading }: StudentsTable
         setAlertPopup(true);
     }
 
-    useEffect(() => {
-        if (!isLoading) setHasLoaded(true);
-    }, [isLoading]);
+    // if (isLoading) {
+    //     return (
+    //         <div className="h-full w-full p-6 flex flex-col gap-4 items-center justify-center">
+    //             <IconLoader2 size={50} stroke={1} color="#707070" className="animate-spin" />
+    //             <span className="font-semibold text-[#707070]">
+    //                 Cargando Estudiantes...
+    //             </span>
+    //         </div>
+    //     );
+    // }
 
-    if (isLoading) {
-        return (
-            <div className="h-full w-full p-6 flex flex-col gap-4 items-center justify-center">
-                <IconLoader2 size={50} stroke={1} color="#707070" className="animate-spin" />
-                <span className="font-semibold text-[#707070]">
-                    Cargando Estudiantes...
-                </span>
-            </div>
-        );
-    }
-
-    if (hasLoaded && dataStudents.length === 0) {
-        return (
-            <div className="h-full w-full p-6 flex flex-col gap-4 items-center justify-center">
-                <IconMoodPuzzled size={50} stroke={1.5} color="#707070" />
-                <span className="font-semibold text-[#707070]">
-                    No se encontraron resultados
-                </span>
-            </div>
-        );
-    }
+    // if (hasLoaded && dataStudents.length === 0) {
+    //     return (
+    //         <div className="h-full w-full p-6 flex flex-col gap-4 items-center justify-center">
+    //             <IconMoodPuzzled size={50} stroke={1.5} color="#707070" />
+    //             <span className="font-semibold text-[#707070]">
+    //                 No se encontraron resultados
+    //             </span>
+    //         </div>
+    //     );
+    // }
 
     return (
         <div className="overflow-auto h-full w-full">
@@ -121,7 +114,7 @@ export default function StudentsTable({ dataStudents, isLoading }: StudentsTable
             {
                 viewEstudent && (
                     <ViewStudent
-                        data={student}
+                        data={student as Student}
                         onClose={() => setViewEstudent(!viewEstudent)}
                     />
                 )

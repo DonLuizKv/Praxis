@@ -16,6 +16,7 @@ export function Dashboard() {
   const { data, loadingData } = useData();
 
   useEffect(() => {
+    console.log(data);
     if (data && data.Students.length > 0) {
       setStudents(data.Students);
     }
@@ -28,7 +29,7 @@ export function Dashboard() {
   );
 
   return (
-    <section className="flex flex-col gap-2 h-full w-full max-lg:items-center px-4 pb-4">
+    <section className="flex flex-col gap-2 w-full max-lg:items-center px-4 pb-4">
       <HeaderSection title="Dashboard" faculty="Facultad de Ingenieria en Sistemas" />
       <article className="h-full w-full grid grid-cols-4 grid-rows-4 max-lg:flex max-lg:flex-col max-lg:w-[500px] max-md:w-full gap-4">
         <BentoCard

@@ -13,6 +13,7 @@ export type LoginBody = {
 
 export type LoginResponse = {
     role: string,
+    status: boolean,
 }
 
 export type VerifyResponse = {

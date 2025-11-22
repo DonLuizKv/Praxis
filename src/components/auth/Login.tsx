@@ -50,7 +50,7 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
             })
         );
 
-        if (!session) {
+        if (!session?.status) {
             setShowErrorButton(true);
             setTimeout(() => setShowErrorButton(false), 2000);
             setErrors({ generalError: "Credenciales inválidas." });
@@ -59,7 +59,9 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
 
         verify();
 
-        router.push(`/${session.role}`);
+        console.log(session);
+        
+        // router.push(`/${session.role}`);
     };
 
     return (

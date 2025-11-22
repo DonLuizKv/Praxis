@@ -14,7 +14,11 @@ export type Student = User & {
     avatar: string | File | null;
 
     scenary: Scenary;
-    documents: [Arl, CoverLetter, CV];
+    documents: {
+        arl: Arl,
+        coverLetter: CoverLetter,
+        cv: CV
+    };
     binnacles: Binnacle[];
 };
 

@@ -16,14 +16,15 @@ const getColor = (count: number) => {
 export default function BinnaclesGrid({ data }: { data: Student[] }) {
     const [currentPage, setCurrentPage] = useState(0);
 
-    // const totalFakeData = Array.from({ length: 200 }, (_, i) => ({
-    //     id: i + 1,
-    //     binnacles: Array.from({ length: Math.floor(Math.random() * 17) }),
-    // }));
+    const totalFakeData = Array.from({ length: 200 }, (_, i) => ({
+        id: i + 1,
+        binnacles: Array.from({ length: Math.floor(Math.random() * 17) }),
+    }));
 
     const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
     const startIndex = currentPage * ITEMS_PER_PAGE;
     const currentData = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    const currentFakeData = totalFakeData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
     const handlePrev = () => setCurrentPage(p => Math.max(p - 1, 0));
     const handleNext = () => setCurrentPage(p => Math.min(p + 1, totalPages - 1));
@@ -39,13 +40,13 @@ export default function BinnaclesGrid({ data }: { data: Student[] }) {
 
             <aside className="h-full w-full">
                 <div className='grid grid-cols-[repeat(auto-fill,minmax(1rem,1fr))] items-start gap-1'>
-                    {currentData.map((student, i) => (
+                    {currentFakeData.map((student, i) => (
                         <div
                             key={i}
                             className={`w-4 h-4 rounded-sm relative ${getColor(student.binnacles.length)} cursor-pointer group`}
                         >
                             <span className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap bg-[#232121] flex-col gap-1 items-center text-white text-[.8rem] rounded-[6px] px-2 py-1 hidden group-hover:flex max-w-[100px]">
-                                <p className="text-wrap">{student.name}</p>
+                                <p className="text-wrap">{"a"}</p>
                                 <p><b>{student.binnacles.length} </b>/ 16</p>
                             </span>
                         </div>

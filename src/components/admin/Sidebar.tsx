@@ -2,37 +2,27 @@
 import { usePathname } from "next/navigation"
 import { IconBook, IconChartPie2Filled, IconLayoutDashboardFilled, IconLogout, IconMenu2, IconMenu3, IconUsersGroup } from "@tabler/icons-react"
 import Image from "next/image"
-import { useState } from "react"
+import { JSX, useState } from "react"
 import { useLogout } from "@/hooks/client/useLogout";
 import Link from "next/link";
+import { Sections } from "@/types/app";
 
-export function Sidebar() {
+interface Props {
+  setSections: (v: Sections) => void;
+  current: Sections;
+}
+
+export function Sidebar({ setSections, current }: Props) {
   const [toggleSidebar, setToggleSiderbar] = useState<boolean>(false);
   const { logout, isLoggingOut } = useLogout();
   const pathname = usePathname();
 
-  const routes = [
-    {
-      label: "Inicio",
-      icon: <IconLayoutDashboardFilled size={30} />,
-      href: "/admin"
-    },
-    {
-      label: "Estudiantes",
-      icon: <IconUsersGroup size={30} />,
-      href: "/admin/students"
-    },
-    {
-      label: "Curriculums",
-      icon: <IconBook size={30} />,
-      href: "/admin/curriculums"
-    },
-    {
-      label: "Reportes",
-      icon: <IconChartPie2Filled size={30} />,
-      href: "/admin/reports"
-    }
-  ]
+  const items: { label: string; icon: JSX.Element; value: Sections }[] = [
+    { label: "Inicio", icon: <IconLayoutDashboardFilled size={30} />, value: "dashboard" },
+    { label: "Estudiantes", icon: <IconUsersGroup size={30} />, value: "students" },
+    { label: "Curriculums", icon: <IconBook size={30} />, value: "curriculums" },
+    { label: "Reportes", icon: <IconChartPie2Filled size={30} />, value: "reports" },
+  ];
 
   const handleLogout = async () => {
     await logout();
@@ -47,7 +37,7 @@ export function Sidebar() {
   }
 
   return (
-    <section className={`bg-[#B33A3A] h-full p-2 text-white flex flex-col gap-3 max-xl:w-full transition-all duration-300 ${toggleSidebar ? "w-fit max-xl:h-fit" : "w-[20rem] max-xl:w-full max-xl:h-fit"}`}>
+    <section className={`bg-[#B33A3A] p-2 text-white flex flex-col gap-3 max-xl:w-full transition-all duration-300 ${toggleSidebar ? "w-fit max-xl:h-fit" : "w-[20rem] max-xl:w-full max-xl:h-fit"}`}>
       <article className={`flex items-center gap-2 ${toggleSidebar ? "justify-center" : "justify-between"}`}>
         <Image
           height={55}
@@ -64,12 +54,13 @@ export function Sidebar() {
 
       <article className={`flex flex-col gap-2 py-2 max-xl:flex-row max-xl:justify-center ${toggleSidebar ? "flex" : "max-xl:hidden"}`}>
         {
-          routes.map((route) => (
-            <Link
-              key={route.href}
-              href={route.href}
+          items.map((item) => (
+            <button
+              type="button"
+              key={item.value}
+              onClick={() => setSections(item.value)}
               className={`
-                ${pathname === route.href ? "bg-[#F1F1F1] text-[#B33A3A]" : "text-[#F1F1F1] bg-transparent"}
+                ${current === item.value ? "bg-[#F1F1F1] text-[#B33A3A]" : "text-[#F1F1F1] bg-transparent"}
                 flex items-center justify-start gap-2
                 p-2 rounded-[4px]
                 font-semibold
@@ -77,9 +68,9 @@ export function Sidebar() {
                 hover:bg-[#F1F1F1] hover:text-[#B33A3A]
 
               `}>
-              {route.icon}
-              <span className={`max-sm:hidden ${toggleSidebar ? "hidden" : "block"}`}>{route.label}</span>
-            </Link>
+              {item.icon}
+              <span className={`max-sm:hidden ${toggleSidebar ? "hidden" : "block"}`}>{item.label}</span>
+            </button>
           ))
         }
       </article>

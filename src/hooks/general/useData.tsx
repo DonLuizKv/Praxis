@@ -29,26 +29,30 @@ export const useData = () => {
 };
 
 export const DataProvider = ({ children }: { children: React.ReactNode }) => {
-    const [data, setData] = useState<DataPraxis | null>(null);
+    const [data, setData] = useState<DataPraxis>({
+        Students: [],
+        Scenarys: [],
+        CVs: []
+    });
+
     const [loadingData, setLoadingData] = useState<boolean>(false);
 
     const getData = async () => {
         setLoadingData(true);
         try {
-            const [students, scenarys, cvs] = await Promise.all([
+            const [students, scenarys] = await Promise.all([
                 Backend.Student.getAll(),
                 Backend.Scenary.getAll(),
-                []
             ]);
 
-            if (!students && !scenarys && !cvs) {
-                setData(null);
-            }
+            setData({
+                Students: students || [],
+                Scenarys: scenarys || [],
+                CVs: []
+            });
 
-            setData({ Students: students, Scenarys: scenarys, CVs: cvs });
         } catch (error) {
             console.error("Error al obtener datos:", error);
-            setLoadingData(false);
         } finally {
             setLoadingData(false);
         }

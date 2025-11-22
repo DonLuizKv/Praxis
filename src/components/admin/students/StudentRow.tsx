@@ -43,11 +43,11 @@ export default function StudentRow({ index, dataStudent, setStudent, openAlert, 
     }
 
     return (
-        <tr className="hover:bg-gray-50 text-center">
+        <tr className="text-center hover:bg-[#F1F1F1]">
             <td className="px-4 py-3">{index}</td>
-            <td className="px-4 py-3">{dataStudent?.name}</td>
-            <td className="px-4 py-3">{dataStudent?.identity_document}</td>
-            <td className="px-4 py-3">{dataStudent?.scenary?.name}</td>
+            <td className="px-4 py-3">{dataStudent?.username}</td>
+            <td className="px-4 py-3">{dataStudent?.identification}</td>
+            <td className="px-4 py-3">{dataStudent?.scenary?.name || "Sin escenario"}</td>
             <td className="px-4 py-3">
                 <p className={`${dataStudent.state ? styles.good : styles.bad} inline-block text-center`}>
                     {dataStudent.state ? "Activo" : "Inactivo"}

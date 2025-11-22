@@ -1,5 +1,5 @@
 import { useSocket } from "./useSocket";
-import { useData } from "@/hooks/general/useAuth";
+import { useData } from "@/hooks/general/useData";
 import Cookies from "js-cookie";
 
 export const useStudent = () => {
@@ -20,10 +20,10 @@ export const useStudent = () => {
             throw new Error(data_response.error || "Error al eliminar el estudiante");
         }
 
-        const studentsFiltered = data.students.filter(student => student.id !== id)
+        const studentsFiltered = data?.Students?.filter(student => student.uid !== id)
         const payload = {
             ...data,
-            students: studentsFiltered
+            Students: studentsFiltered
         }
 
         setData(payload);

@@ -251,6 +251,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setIsVerifying(true);
         try {
             const res = await Backend.Auth.verify();
+            console.log(res);
 
             if (res?.userData) {
                 setUser(res.userData);
