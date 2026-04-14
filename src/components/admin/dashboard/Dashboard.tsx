@@ -6,21 +6,17 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { IconLoader2 } from "@tabler/icons-react";
 import Stadistics from "./Stadistics";
-import ChartCard from "@/components/ui/ChartCard";
-import { GenerateDataGraphic } from "@/utils/GenerateDataGraphic";
 import { useData } from "@/hooks/general/useData";
 import { Student } from "@/types/user";
+import { useSocket } from "@/hooks/server/useSocket";
+import ChartCard from "@/components/ui/ChartCard";
+import { GenerateDataGraphic } from "@/utils/GenerateDataGraphic";
 
 export function Dashboard() {
   const [students, setStudents] = useState<Student[]>([]);
+  const [validateSocket, setValidateSocket] = useState<{ message: string }>({ message: "" });
   const { data, loadingData } = useData();
-
-  useEffect(() => {
-    console.log(data);
-    if (data && data.Students.length > 0) {
-      setStudents(data.Students);
-    }
-  }, [data])
+  const { socket } = useSocket();
 
   if (loadingData) return (
     <div className="flex items-center justify-center h-full w-full">

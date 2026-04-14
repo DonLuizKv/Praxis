@@ -1,23 +1,23 @@
 "use client"
-import { Binnacle } from "@/types/user";
+
+import { Binnacle } from "@/types/document";
 import { IconDownload, IconX, IconZoomScan } from "@tabler/icons-react";
 import { useRef } from "react";
 
 interface BinnacleViewerProps {
     binnacles: Binnacle[];
     onClose: () => void;
-    onView: (file: File | string, label: string) => void;
     gridStyle?: string;
 }
 
 
-export default function BinnacleViewer({ onClose, gridStyle, binnacles, onView }: BinnacleViewerProps) {
+export default function BinnacleViewer({ onClose, gridStyle, binnacles }: BinnacleViewerProps) {
 
     const ButtonOpenViwerRef = useRef<HTMLButtonElement>(null);
 
     const openViewer = (binnacle: Binnacle) => {
         ButtonOpenViwerRef.current?.scrollIntoView({ behavior: "smooth" });
-        onView(binnacle.file_path, binnacle.name);
+        // onView(binnacle.file_path, binnacle.name);
     }
 
     return (

@@ -17,10 +17,10 @@ export default function UploadArchive({ onUpload, onClose }: UploadArchiveProps)
     const handleSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length === 0) return setError("No se ha seleccionado ningún archivo");
 
-        const selectedFile = e.target.files[0];
-        if (selectedFile.size > 524288000) return setError("El tamaño es mayor a 500 MB");
+        const selectedFile = e.target.files?.[0];
+        if (selectedFile!.size > 524288000) return setError("El tamaño es mayor a 500 MB");
 
-        setFile(selectedFile);
+        setFile(selectedFile || null);
         setError(null);
     }
 

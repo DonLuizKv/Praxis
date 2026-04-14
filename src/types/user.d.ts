@@ -4,9 +4,8 @@ export type User = {
     uid?: number;
     username: string;
     email: string;
-    password?: string;
-    state: boolean;
-    role: string;
+    active: boolean;
+    role: Role;
 }
 
 export type Student = User & {
@@ -23,3 +22,6 @@ export type Student = User & {
 };
 
 export type Admin = User;
+export type Teacher = User;
+
+export type Role = "student" | "admin";

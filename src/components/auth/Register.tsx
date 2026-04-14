@@ -2,10 +2,10 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useSocket } from "@/hooks/server/useSocket"
-import { Register } from "@/utils/DataSync"
 import { IconEye, IconEyeOff } from "@tabler/icons-react"
 import InputField from "../ui/InputField"
 import Button from "../ui/Button"
+import { Backend } from "@/api/Requests"
 
 interface RegisterPageProps {
     changePointer: (pointer: "login" | "register") => void
@@ -76,28 +76,17 @@ export default function RegisterPage({ changePointer }: RegisterPageProps) {
 
         try {
             const payload = {
-                name,
+                username: name,
                 email,
                 password: password.value,
-                identity_document,
-                state: true,
-                role: "student"
             }
 
-            const response = await Register(payload)
+            const response = await Backend.Auth.register(payload)
 
-            if (response.error) {
-                alert(response.error)
+            if (response) {
+                alert(response)
                 return
             }
-
-            socket?.emit("users:create", [
-                {
-                    type: "broadcast",
-                    to: "admins",
-                    data: response
-                }
-            ])
 
             router.push("/login");
         } catch (err) {

@@ -251,10 +251,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setIsVerifying(true);
         try {
             const res = await Backend.Auth.verify();
-            console.log(res);
-
-            if (res?.userData) {
-                setUser(res.userData);
+            if (res) {
+                setUser(res);
                 setIsAuthenticated(true);
             } else {
                 setUser(null);
@@ -268,12 +266,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    useEffect(() => {
+        verify();
+    }, []);
+
     const logout = async () => {
         try {
             await Backend.Auth.logout();
         } finally {
             setUser(null);
             setIsAuthenticated(false);
+            setIsVerifying(false);
         }
     };
 

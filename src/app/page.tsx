@@ -396,7 +396,7 @@ export default function Home() {
                 formativas.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/auth" className="bg-white text-[#B33A3A] group flex items-center justify-center gap-2 px-6 py-3 rounded-full font-light border border-transparent hover:bg-transparent hover:text-white hover:border-white transition-all duration-300">
+                <Link href="/auth" className="bg-transparent border border-white group flex items-center justify-center gap-2 px-6 py-3 rounded-full font-light hover:bg-white hover:text-[#B33A3A] transition-all duration-300">
                   Comenzar Ahora
                   <IconChevronRight className="h-4 w-4 transition-all duration-300 group-hover:translate-x-1" />
                 </Link>
@@ -503,19 +503,3 @@ export default function Home() {
     </main>
   )
 }
-
-
-
-
-// const NuestraHistoriaContent = () => {
-//   return (
-//     <div className="space-y-4">
-//       <p className="text-gray-600">
-//         Praxis nació de la necesidad de modernizar y simplificar la gestión de prácticas formativas.
-//       </p>
-//       <p className="text-gray-600">
-//         Nuestro objetivo es facilitar el proceso tanto para estudiantes como para empresas e instituciones educativas.
-//       </p>
-//     </div>
-//   );
-// }

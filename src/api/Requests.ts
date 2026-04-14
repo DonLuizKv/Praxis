@@ -5,7 +5,7 @@ import { Scenary } from "@/types/document";
 
 export const Backend = {
     Auth: {
-        register: (data: User) => API<User, RegisterResponse>({
+        register: (data: any) => API<any, RegisterResponse>({
             endpoint: "/auth/register",
             props: {
                 method: "POST",
@@ -22,7 +22,7 @@ export const Backend = {
             }
         }),
 
-        verify: () => API<null, VerifyResponse>({
+        verify: () => API<null, User>({
             endpoint: "/auth/verify",
             credentials: "include",
             props: { method: "GET" },
@@ -30,13 +30,58 @@ export const Backend = {
 
         logout: () => API<null, null>({
             endpoint: "/auth/logout",
+            credentials: "include",
             props: { method: "POST" },
+        }),
+    },
+
+    Users: {
+        getAll: () => API<null, User[]>({
+            endpoint: "/users",
+            credentials: "include",
+            props: {
+                method: "GET",
+            }
+        }),
+
+        getOne: (id: string) => API<string, User>({
+            endpoint: `/users/${id}`,
+            credentials: "include",
+            props: {
+                method: "GET",
+            }
+        }),
+
+        create: (data: any) => API<any, User>({
+            endpoint: "/users",
+            credentials: "include",
+            props: {
+                method: "POST",
+                body: data
+            }
+        }),
+
+        update: (id: string, data: any) => API<any, User>({
+            endpoint: `/users/${id}`,
+            credentials: "include",
+            props: {
+                method: "PUT",
+                body: data
+            }
+        }),
+
+        delete: (id: string) => API<string, User>({
+            endpoint: `/users/${id}`,
+            credentials: "include",
+            props: {
+                method: "DELETE",
+            }
         }),
     },
 
     Student: {
         getAll: () => API<null, Student[]>({
-            endpoint: "/student",
+            endpoint: "/students",
             credentials: "include",
             props: {
                 method: "GET",

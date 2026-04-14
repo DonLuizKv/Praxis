@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button"
 import { useRouter } from "next/navigation"
 import { useFetch } from "@/hooks/server/useFetch"
 import { useAuth } from "@/hooks/general/useAuth"
+import { useSocket } from "@/hooks/server/useSocket"
 
 interface LoginPageProps {
     changePointer: (pointer: "register" | "login") => void
@@ -20,8 +21,6 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
     const router = useRouter()
     const { Call, Backend, loading } = useFetch();
     const { verify } = useAuth();
-    // const { socket } = useSocket();
-
 
     const validateForm = () => {
         const newErrors: typeof errors = {}
@@ -50,7 +49,7 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
             })
         );
 
-        if (!session?.status) {
+        if (!session) {
             setShowErrorButton(true);
             setTimeout(() => setShowErrorButton(false), 2000);
             setErrors({ generalError: "Credenciales inválidas." });
@@ -59,9 +58,7 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
 
         verify();
 
-        console.log(session);
-        
-        // router.push(`/${session.role}`);
+        router.push(`/${session}`);
     };
 
     return (

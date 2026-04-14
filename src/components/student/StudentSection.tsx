@@ -8,14 +8,13 @@ import UploadBinnacles from "../popups/UploadBinnacles";
 import ViewBinnacles from "../popups/ViewBinnacles";
 import Arl from "./Arl";
 import CoverLetter from "./CoverLetter";
-import { Document, Student } from "@/types/user";
 import UserInfo from "./UserInfo";
 import Notifications from "../popups/Notifications";
-import { uploadDocument } from "@/utils/DataSync";
 import SettingStudent from "./SettingStudent";
+import { Student } from "@/types/user";
 
 interface StudentSectionProps {
-    data: Student ,
+    data: Student,
     onLogout: () => void
 }
 
@@ -26,9 +25,6 @@ export default function StudentSection({ data, onLogout }: StudentSectionProps) 
     const [showUploadArchive, setShowUploadArchive] = useState(false);
     const [showSetting, setShowSetting] = useState(false);
     const [uploadType, setUploadType] = useState<"curriculum" | "coverLetter" |null>(null);
-
-    const [curriculum, setCurriculum] = useState<File | null>(null);
-    const [coverLetter, setCoverLetter] = useState<File | null>(null);
 
     const description = `
         Tecnologia en sistemas de informacion y redes de computo
@@ -52,23 +48,15 @@ export default function StudentSection({ data, onLogout }: StudentSectionProps) 
         setShowSetting(!showSetting);
     }
 
-    const handleLogout = async () => {
-        onLogout();
-    };
-
     const handleUploadBinnacles = async (status: boolean, files: File[]) => {
         console.log(status, files);
     }
-
-    useEffect(() => {
-        console.log(curriculum, coverLetter);
-    }, [curriculum, coverLetter]);
 
     return (
         <section className="h-full w-full grid grid-cols-4 grid-rows-4 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-4 max-md:gap-2">
             <article className="row-span-4 col-span-1 max-lg:col-span-1 max-md:row-span-1 max-md:row-start-6">
                 <Curriculum
-                    nameStudent={data?.name || "Sin Nombre"}
+                    nameStudent={data?.username || "Sin Nombre"}
                     description={description}
                     faculty={"Ingenieria en sistemas"}
                     uploadCurriculum={handleUploadCurriculum}
@@ -79,61 +67,28 @@ export default function StudentSection({ data, onLogout }: StudentSectionProps) 
             </article>
             <article className="row-span-2 col-span-1 max-lg:col-span-1 max-md:row-start-1 max-md:row-span-1">
                 <UserInfo
-                    userName={data?.name}
-                    state={data?.state}
+                    userName={data?.username}
+                    state={data?.active}
                     onShowNotifications={handleShowNotifications}
                     sonShowSettings={handleShowSetting}
-                    onLogout={handleLogout}
+                    onLogout={onLogout}
                 />
             </article>
             <article className="row-span-2 col-span-1 max-lg:col-span-1 max-md:row-span-1">
-                <Arl File={(data?.documents.arl as Document)?.file_path} uploaded={data?.documents.arl !== null} />
+                <Arl File={""} uploaded={false} />
             </article>
             <article className="row-span-2 col-span-1 max-lg:col-span-1 max-md:row-span-1">
-                <CoverLetter File={(data?.documents.coverLetter as Document)?.file_path} uploaded={data?.documents.coverLetter !== null} onUpload={handleUploadCoverLetter} />
+                <CoverLetter File={""} uploaded={false} onUpload={handleUploadCoverLetter} />
             </article>
             <article className="row-span-2 col-span-1 max-lg:col-span-1 max-md:row-span-1">
                 <Binnacle numberBinnacles={data?.binnacles?.length || 0} onUpload={() => setShowUploadBinnacles(true)} onViewBinnacles={() => setShowViewBinnacles(true)} />
             </article>
 
             {showNotifications && <Notifications notifications={[]} onClose={handleShowNotifications} />}
-            {
-                showUploadArchive && (
-                    <UploadArchive
-                        onClose={() => setShowUploadArchive(!showUploadArchive)}
-                        onUpload={async (file) => {
-                            if (uploadType === "curriculum") {
-                                setCurriculum(file);
-                            } else if (uploadType === "coverLetter") {
-                                setCoverLetter(file);
-                            }
-                            await uploadDocument({
-                                student_id: data.id,
-                                file: file,
-                                name: file.name,
-                            });
-                        }}
-                    />
-                )
-            }
-            {
-                showUploadBinnacles && (
-                    <UploadBinnacles
-                        onClose={() => setShowUploadBinnacles(!showUploadBinnacles)}
-                        onUpload={handleUploadBinnacles}
-                    />
-                )
-            }
-            {
-                showViewBinnacles && (
-                    <ViewBinnacles binnacles={data.binnacles} onView={() => { }} onClose={() => setShowViewBinnacles(!showViewBinnacles)} />
-                )
-            }
-            {
-                showSetting && (
-                    <SettingStudent data={data} onClose={handleShowSetting} />
-                )
-            }
+            {showSetting && <SettingStudent data={data} onClose={handleShowSetting} />}
+            {showUploadBinnacles && <UploadBinnacles onUpload={handleUploadBinnacles} onClose={()=> setShowUploadBinnacles(false)} />}
+            {showViewBinnacles && <ViewBinnacles binnacles={data?.binnacles || []} onClose={() => setShowViewBinnacles(!showViewBinnacles)} />}
+            {showUploadArchive && <UploadArchive onClose={() => setShowUploadArchive(!showUploadArchive)} onUpload={()=>{}} />}
         </section>
     );
 }

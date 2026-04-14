@@ -16,7 +16,7 @@ const getColor = (count: number) => {
 export default function BinnaclesGrid({ data }: { data: Student[] }) {
     const [currentPage, setCurrentPage] = useState(0);
 
-    const totalFakeData = Array.from({ length: 200 }, (_, i) => ({
+    const totalFakeData = Array.from({ length: 20 }, (_, i) => ({
         id: i + 1,
         binnacles: Array.from({ length: Math.floor(Math.random() * 17) }),
     }));
@@ -40,7 +40,7 @@ export default function BinnaclesGrid({ data }: { data: Student[] }) {
 
             <aside className="h-full w-full">
                 <div className='grid grid-cols-[repeat(auto-fill,minmax(1rem,1fr))] items-start gap-1'>
-                    {currentFakeData.map((student, i) => (
+                    {data.map((student, i) => (
                         <div
                             key={i}
                             className={`w-4 h-4 rounded-sm relative ${getColor(student.binnacles.length)} cursor-pointer group`}

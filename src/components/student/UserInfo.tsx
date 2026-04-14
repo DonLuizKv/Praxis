@@ -64,14 +64,13 @@ export default function UserInfo({ state, onShowNotifications, sonShowSettings, 
                     </button>
                 </aside>
             </article>
-            <article className="h-full w-full p-4 rounded-[20px] bg-[#F1F1F1] border border-[#C8C8C8] max-lg:hidden max-md:flex">
-                <aside className="flex items-center gap-2">
-                    <p className="w-full h-full flex items-center gap-2">
-                        <span className="text-[1.1rem] font-light text-[#707070]">Semana</span>
-                        <span className="text-[1.1rem] font-light text-[#707070]">{getCurrentWeekNumber("2025-02-04")}</span>
-                    </p>
-
-                </aside>
+            <article className="h-full w-full flex items-center flex-col gap-6 p-4 rounded-[20px] bg-[#F1F1F1] border border-[#C8C8C8] max-lg:hidden max-md:flex">
+                <p className="text-md text-gray-400 line-through">Semana 14</p>
+                <p className="text-xl text-gray-500 line-through">Semana 15</p>
+                <p className="flex items-center justify-center gap-2">
+                    <span className="text-[2rem] font-bold text-[#717171]">Semana</span>
+                    <span className="text-[2rem] font-bold text-[#717171]">{getCurrentWeekNumber("2025-02-04")}</span>
+                </p>
             </article>
         </section>
     );

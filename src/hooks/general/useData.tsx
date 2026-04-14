@@ -40,14 +40,13 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     const getData = async () => {
         setLoadingData(true);
         try {
-            const [students, scenarys] = await Promise.all([
+            const [students] = await Promise.all([
                 Backend.Student.getAll(),
-                Backend.Scenary.getAll(),
             ]);
 
             setData({
                 Students: students || [],
-                Scenarys: scenarys || [],
+                Scenarys: [],
                 CVs: []
             });
 

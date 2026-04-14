@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { Role, User } from "./user";
 
 export type RegisterBody = User;
 
@@ -11,11 +11,9 @@ export type LoginBody = {
     password: string,
 }
 
-export type LoginResponse = {
-    role: string,
-    status: boolean,
-}
+export type LoginResponse = Role;
+export type RegisterResponse = string;
 
 export type VerifyResponse = {
-    userData: User | null,
+    userData: Omit<User, "password"> | null,
 }
