@@ -1,7 +1,6 @@
 import { Arl, Binnacle, CoverLetter, CV, Scenary } from "./document";
 
 export type User = {
-    uid?: number;
     username: string;
     email: string;
     active: boolean;
@@ -10,18 +9,16 @@ export type User = {
 
 export type Student = User & {
     identification: number;
-    avatar: string | File | null;
+    avatar: string | null;
 
     scenary: Scenary;
     documents: {
-        arl: Arl,
-        coverLetter: CoverLetter,
-        cv: CV
+        arl: Arl | null;
+        cover_letter: CoverLetter | null;
+        cv: CV | null;
     };
     binnacles: Binnacle[];
 };
 
 export type Admin = User;
-export type Teacher = User;
-
 export type Role = "student" | "admin";

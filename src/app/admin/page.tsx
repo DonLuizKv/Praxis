@@ -19,7 +19,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-dvh flex max-xl:flex-col">
+    <main className="min-h-dvh flex p-4 gap-3">
       <Sidebar setSections={setSections} current={sections} />
       {SectionComponents[sections]}
     </main>

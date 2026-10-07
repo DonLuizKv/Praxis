@@ -1,11 +1,10 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useSocket } from "@/hooks/server/useSocket"
 import { IconEye, IconEyeOff } from "@tabler/icons-react"
 import InputField from "../ui/InputField"
 import Button from "../ui/Button"
-import { Backend } from "@/api/Requests"
+import { Register } from "@/api/auth.request"
 
 interface RegisterPageProps {
     changePointer: (pointer: "login" | "register") => void
@@ -13,7 +12,6 @@ interface RegisterPageProps {
 
 export default function RegisterPage({ changePointer }: RegisterPageProps) {
     const router = useRouter();
-    const { socket } = useSocket();
 
     const [name, setName] = useState<string>("")
     const [identity_document, setidentity_document] = useState<number>(0)
@@ -81,7 +79,7 @@ export default function RegisterPage({ changePointer }: RegisterPageProps) {
                 password: password.value,
             }
 
-            const response = await Backend.Auth.register(payload)
+            const response = await Register(payload)
 
             if (response) {
                 alert(response)

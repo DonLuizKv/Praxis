@@ -25,11 +25,11 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
         // Crear solo UNA instancia del socket
         const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL as string, {
             autoConnect: true,
-            // transports: ["websocket"], // evita polling si quieres más estabilidad
+            transports: ["websocket"], // evita polling si quieres más estabilidad
             reconnection: true,
             reconnectionAttempts: 10,
             reconnectionDelay: 1000,
-            // withCredentials: true, // si usas cookies
+            withCredentials: true, // si usas cookies
         });
 
         socketref.current = socket;

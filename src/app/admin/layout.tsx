@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css"
 import "@/styles/Animations.css"
-import AnimatedLayout from "@/components/ui/AnimatedLayout";
 import { DataProvider } from "@/hooks/general/useData";
 import { SocketProvider } from "@/hooks/server/useSocket";
 
@@ -14,9 +13,7 @@ export default function AdminLayout({ children }: Readonly<{ children: React.Rea
     return (
         <DataProvider>
             <SocketProvider>
-                <AnimatedLayout>
                     {children}
-                </AnimatedLayout>
             </SocketProvider>
         </DataProvider>
     );

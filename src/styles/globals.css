@@ -1,14 +1,41 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #FBFBFB;
+  --background: #f1f1f1;
   --foreground: #232121;
-  --numBoxs: 5;
+  --red-primary: #B33A3A;
+  --red-secondary: #eb8e8e;
+  --blue-primary: #3A5AB3;
+  --blue-secondary: #8eb4eb;
+  --green-primary: #3AB34F;
+  --green-secondary: #8eb4eb;
+  --yellow-primary: #B3A83A;
+  --yellow-secondary: #ebdd8e;
+  --border-color-light: #C8C8C8;
+  --border-color-muted: #717171;
+  --border-color-dark: #1E1E1E;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-red-primary: var(--red-primary);
+  --color-red-secondary: var(--red-secondary);
+  --color-blue-primary: var(--blue-primary);
+  --color-blue-secondary: var(--blue-secondary);
+  --color-green-primary: var(--green-primary);
+  --color-green-secondary: var(--green-secondary);
+  --color-yellow-primary: var(--yellow-primary);
+  --color-yellow-secondary: var(--yellow-secondary);
+  --color-border-light: var(--border-color-light);
+  --color-border-muted: var(--border-color-muted);
+  --color-border-dark: var(--border-color-dark);
+
+  --font-asap: 'Asap', 'Asap Fallback', sans-serif;
+  --font-sans: 'Geist Sans', 'Geist Fallback', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,27 +45,10 @@
   }
 }
 
-/* * {
-  outline: 1px solid red;
-} */
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
 }
-
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-}
-
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -51,6 +61,15 @@ button:disabled {
   background: #707070;
   border-radius: 4px;
 }
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 
 .bento-card {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;

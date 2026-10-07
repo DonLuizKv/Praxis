@@ -1,19 +1,31 @@
 import { Role, User } from "./user";
 
-export type RegisterBody = User;
+export type RegisterBody = {
+    username: string,
+    email: string,
+    password: string,
+};
 
-export type RegisterResponse = {
-    message: string;
-}
+export type RegisterResponse = string;
 
 export type LoginBody = {
     email: string,
     password: string,
 }
+export type LoginResponse = {
+    access_token: string;
+    role: Role;
+};
 
-export type LoginResponse = Role;
-export type RegisterResponse = string;
+export type RefreshResponse = {
+    access_token: string;
+};
 
 export type VerifyResponse = {
     userData: Omit<User, "password"> | null,
 }
+
+export type LogoutResponse = {
+    message: string;
+}
+

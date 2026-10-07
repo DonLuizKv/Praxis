@@ -1,6 +1,6 @@
 "use client";
 
-import { Backend } from "@/api/Requests";
+import { UserRequests } from "@/api/user.request";
 import { CV, Scenary } from "@/types/document";
 import { Student } from "@/types/user";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -41,7 +41,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setLoadingData(true);
         try {
             const [students] = await Promise.all([
-                Backend.Student.getAll(),
+                UserRequests.getAll(),
             ]);
 
             setData({

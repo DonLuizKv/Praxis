@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import { Backend } from "@/api/Requests";
 
 type UseFetchReturn = {
     Call: <T>(fn: () => Promise<T>) => Promise<T | undefined>;
@@ -7,7 +6,7 @@ type UseFetchReturn = {
     error: string | null;
 };
 
-export const useFetch = (): UseFetchReturn & { Backend: typeof Backend } => {
+export const useFetch = (): UseFetchReturn => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -35,5 +34,5 @@ export const useFetch = (): UseFetchReturn & { Backend: typeof Backend } => {
         }
     }, []);
 
-    return { Backend, Call, loading, error };
+    return { Call, loading, error };
 };

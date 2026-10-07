@@ -1,17 +1,13 @@
 "use client";
-import { Backend } from "@/api/Requests";
 import StudentSection from "@/components/student/StudentSection";
 import { useAuth } from "@/hooks/general/useAuth";
-import { useFetch } from "@/hooks/server/useFetch"
-import { useSocket } from "@/hooks/server/useSocket";
 import { Student } from "@/types/user";
-import { IconLoader2, IconMoodSadFilled } from "@tabler/icons-react";
-import { useMemo } from "react";
+import { IconMoodSadFilled } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 
 export default function Home() {
-  const router = useRouter();  
+  const router = useRouter(); 
   const { user, logout } = useAuth();
 
   const handleLogout = async () => {

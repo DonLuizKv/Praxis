@@ -224,7 +224,7 @@
 
 import { User } from "@/types/user";
 import { createContext, useContext, useState, useEffect } from "react";
-import { Backend } from "@/api/Requests";
+import { Logout, Verify } from "@/api/auth.request";
 
 interface AuthContextProps {
     user: User | null;
@@ -250,7 +250,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const verify = async () => {
         setIsVerifying(true);
         try {
-            const res = await Backend.Auth.verify();
+            const res = await Verify();
+            console.log(res);
             if (res) {
                 setUser(res);
                 setIsAuthenticated(true);
@@ -272,7 +273,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const logout = async () => {
         try {
-            await Backend.Auth.logout();
+            await Logout();
         } finally {
             setUser(null);
             setIsAuthenticated(false);

@@ -1,88 +1,100 @@
-"use client"
-import { usePathname } from "next/navigation"
-import { IconBook, IconChartPie2Filled, IconLayoutDashboardFilled, IconLogout, IconMenu2, IconMenu3, IconUsersGroup } from "@tabler/icons-react"
-import Image from "next/image"
-import { JSX, useState } from "react"
-import { useLogout } from "@/hooks/client/useLogout";
-import Link from "next/link";
 import { Sections } from "@/types/app";
+import { IconBell, IconBrandGithub, IconChevronDown, IconChevronRight, IconLogicOr, IconLogout, IconMail, IconPhone, IconHome, IconBook, IconFileText, IconSettings, IconUser } from "@tabler/icons-react";
+import Image from "next/image";
+import { JSX } from "react";
 
 interface Props {
   setSections: (v: Sections) => void;
   current: Sections;
 }
 
-export function Sidebar({ setSections, current }: Props) {
-  const [toggleSidebar, setToggleSiderbar] = useState<boolean>(false);
-  const { logout, isLoggingOut } = useLogout();
-  const pathname = usePathname();
+type NavItem = {
+  label: string;
+  icon: JSX.Element;
+  value: Sections;
+}
 
-  const items: { label: string; icon: JSX.Element; value: Sections }[] = [
-    { label: "Inicio", icon: <IconLayoutDashboardFilled size={30} />, value: "dashboard" },
-    { label: "Estudiantes", icon: <IconUsersGroup size={30} />, value: "students" },
-    { label: "Curriculums", icon: <IconBook size={30} />, value: "curriculums" },
-    { label: "Reportes", icon: <IconChartPie2Filled size={30} />, value: "reports" },
+const NavButton = ({ label, icon, value, current, setSections }: NavItem & { current: Sections; setSections: (v: Sections) => void }) => {
+  return (
+    <button
+      onClick={() => setSections(value)}
+      className={`
+          relative
+          w-full
+          text-background
+          flex items-center gap-2 p-2 rounded-lg
+          transition-colors ease
+          group
+        `}
+      >
+      <span className={`
+        text-base 
+        font-semibold 
+        font-asap 
+        flex gap-1 items-center
+        ${current === value ? "text-background" : ""}
+      `}>{icon}</span>
+      <span className="absolute left-8 ml-2 whitespace-nowrap opacity-0 bg-border-dark px-2 py-1 rounded-lg text-xs group-hover:opacity-100 transition-opacity duration-300 delay-100">{label}</span>
+    </button>
+  )
+}
+
+export function Sidebar({ setSections, current }: Props) {
+  const items: NavItem[] = [
+    { label: "Inicio", icon: <IconHome size={25} stroke={2} />, value: "dashboard" },
+    { label: "Estudiantes", icon: <IconUser size={25} stroke={2} />, value: "students" },
+    { label: "Curriculums", icon: <IconBook size={25} stroke={2} />, value: "curriculums" },
+    { label: "Reportes", icon: <IconFileText size={25} stroke={2} />, value: "reports" },
   ];
 
   const handleLogout = async () => {
-    await logout();
-  }
-
-  if (isLoggingOut) {
-    return <div className="h-full w-full flex items-center justify-center fixed top-0 left-0 z-50 backdrop-blur-[2px] bg-white">
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold">Cerrando sesión...</h1>
-      </div>
-    </div>
   }
 
   return (
-    <section className={`bg-[#B33A3A] p-2 text-white flex flex-col gap-3 max-xl:w-full transition-all duration-300 ${toggleSidebar ? "w-fit max-xl:h-fit" : "w-[20rem] max-xl:w-full max-xl:h-fit"}`}>
-      <article className={`flex items-center gap-2 ${toggleSidebar ? "justify-center" : "justify-between"}`}>
-        <Image
-          height={55}
-          width={55}
-          alt="logo"
-          src={"/logos/logo_vectorized_text.png"}
-          className={`rounded-[4px] max-xl:size-[3rem] ${toggleSidebar ? "hidden max-xl:flex" : "flex"}`}
-        />
+    <aside className="w-fit p-4 flex flex-col gap-4 bg-red-primary rounded-2xl">
+      <ExpandableButton />
 
-        <button type="button" onClick={() => setToggleSiderbar(!toggleSidebar)} className="flex items-center h-[55px] px-2 justify-center">
-          {toggleSidebar ? <IconMenu3 color="#ffff" /> : <IconMenu2 color="#ffff" />}
-        </button>
-      </article>
-
-      <article className={`flex flex-col gap-2 py-2 max-xl:flex-row max-xl:justify-center ${toggleSidebar ? "flex" : "max-xl:hidden"}`}>
+      <nav className="flex flex-col items-start gap-3">
         {
-          items.map((item) => (
-            <button
-              type="button"
-              key={item.value}
-              onClick={() => setSections(item.value)}
-              className={`
-                ${current === item.value ? "bg-[#F1F1F1] text-[#B33A3A]" : "text-[#F1F1F1] bg-transparent"}
-                flex items-center justify-start gap-2
-                p-2 rounded-[4px]
-                font-semibold
-                transition-all duration-200
-                hover:bg-[#F1F1F1] hover:text-[#B33A3A]
-
-              `}>
-              {item.icon}
-              <span className={`max-sm:hidden ${toggleSidebar ? "hidden" : "block"}`}>{item.label}</span>
-            </button>
+          items.map((item: NavItem, index: number) => (
+            <NavButton
+              key={index}
+              label={item.label}
+              value={item.value}
+              current={current}
+              icon={item.icon}
+              setSections={setSections}
+            />
           ))
         }
-      </article>
+      </nav>
+    </aside>
+  );
+}
 
-      <article className={`h-full flex flex-col justify-end gap-2 ${toggleSidebar ? "" : "max-xl:hidden"}`}>
-        <aside className={`flex flex-col justify-between gap-2 pt-2 border-t border-[#c8c8c8] max-xl:flex-row max-xl:justify-center  ${toggleSidebar && "flex-col"}`}>
-          <button type="button" onClick={handleLogout} className={`flex items-center gap-2 p-2 rounded-[4px] hover:bg-[#F1F1F1]/20`}>
-            <IconLogout size={30} color="#FFF" />
-            {!toggleSidebar && <span className="font-semibold max-lg:hidden">Cerrar sesión</span>}
-          </button>
-        </aside>
-      </article>
-    </section>
-  )
+const ExpandableButton = () => {
+  return (
+    // 1. Añadimos overflow-hidden para ocultar los iconos cuando el botón es pequeño
+    // 2. Definimos un ancho inicial (w-12) y un ancho final (w-48 o el que prefieras)
+    <button className="group relative flex items-center rounded-full p-1 w-10.5 h-10.5 hover:w-40 transition-all duration-500 ease-in-out overflow-hidden">
+
+      {/* Imagen: Siempre visible a la izquierda */}
+      <div className="shrink-0">
+        <Image
+          src="/profile.jpeg"
+          alt="User"
+          width={34}
+          height={34}
+          className="rounded-full object-cover"
+        />
+      </div>
+
+      {/* Contenedor de Iconos: Se revelan al expandirse */}
+      <div className="w-full h-full text-background flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+        <IconBell size={20} className="hover:scale-110 transition-transform" />
+        <IconSettings size={20} className="hover:scale-110 transition-transform" />
+        <IconLogout size={20} className="hover:scale-110 transition-transform" />
+      </div>
+    </button>
+  );
 }

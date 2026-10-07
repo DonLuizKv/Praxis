@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button"
 import { useRouter } from "next/navigation"
 import { useFetch } from "@/hooks/server/useFetch"
 import { useAuth } from "@/hooks/general/useAuth"
-import { useSocket } from "@/hooks/server/useSocket"
+import { Login } from "@/api/auth.request"
 
 interface LoginPageProps {
     changePointer: (pointer: "register" | "login") => void
@@ -19,7 +19,7 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
     const [showErrorButton, setShowErrorButton] = useState<boolean>(false)
 
     const router = useRouter()
-    const { Call, Backend, loading } = useFetch();
+    const { Call, loading } = useFetch();
     const { verify } = useAuth();
 
     const validateForm = () => {
@@ -39,26 +39,26 @@ export default function LoginPage({ changePointer }: LoginPageProps) {
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!validateForm()) return;
+        // e.preventDefault();
+        // if (!validateForm()) return;
 
-        const session = await Call(() =>
-            Backend.Auth.login({
-                email: login.email,
-                password: login.password,
-            })
-        );
+        // const session = await Call(() =>
+        //     Login({
+        //         email: login.email,
+        //         password: login.password,
+        //     })
+        // );
 
-        if (!session) {
-            setShowErrorButton(true);
-            setTimeout(() => setShowErrorButton(false), 2000);
-            setErrors({ generalError: "Credenciales inválidas." });
-            return;
-        }
+        // if (!session) {
+        //     setShowErrorButton(true);
+        //     setTimeout(() => setShowErrorButton(false), 2000);
+        //     setErrors({ generalError: "Credenciales inválidas." });
+        //     return;
+        // }
 
-        verify();
+        // verify();
 
-        router.push(`/${session}`);
+        router.push(`/admin`);
     };
 
     return (

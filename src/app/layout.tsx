@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@/styles/globals.css"
 import "@/styles/Animations.css"
 import { Asap } from "next/font/google";
-import AnimatedLayout from "@/components/ui/AnimatedLayout";
 
 const asap = Asap({
   subsets: ["latin"],
@@ -21,10 +20,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <link rel="icon" href="/logo_animed.ico" />
       </head>
-      <body className={asap.className}>
-            <AnimatedLayout>
-              {children}
-            </AnimatedLayout>
+      <body className={`bg-background text-foreground ${asap.className}`}>
+        {children}
       </body>
     </html>
   );
